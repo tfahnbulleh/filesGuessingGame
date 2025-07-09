@@ -1,6 +1,6 @@
 all: README.md
 
-README.md: myGussingGame.sh
+README.md: guessinggame.sh
 	echo "## The Unix Workbench course assignment" > README.md
 	echo "\n**Description**: Program *guessinggame.sh* Continuously ask the user for the number of files in the PWD until they get it correct." >> README.md
 	echo -n "\n**Date**: " >> README.md
