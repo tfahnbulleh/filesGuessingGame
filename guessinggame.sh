@@ -17,21 +17,19 @@ function getUseInput {
 
 #function to ask user for input
 function calculatePercent {
-    percent=$((user_input / totalFiles))
-    percent=$((percent * expectedPercentValue))
+    percent=$(awk "BEGIN {print $user_input / $totalFiles}")
+    percent=$(awk "BEGIN {print $percent * $expectedPercentValue}")
 }
 
-while [[ percent -ne expectedPercentValue ]]; do
+while awk "BEGIN {exit !($percent != $expectedPercentValue)}"; do
   getUseInput #function call to get user input
   calculatePercent  #function call to calculate the percent
-  if [[ percent -lt expectedPercentValue ]]; then
+  if awk "BEGIN {exit !($percent < $expectedPercentValue)}"; then
       echo 'Your input is low'
- elif [[ percent -eq 99 ]]; then
-      echo 'You are very close'
- elif [[ percent -gt expectedPercentValue ]]; then
+ elif awk "BEGIN {exit !($percent > $expectedPercentValue)}"; then
       echo 'Your input is high'
  else 
       echo 'Congratulations!! Total files is '$totalFiles
-      break
- fi
+      break
+ fi
 done
